@@ -1,6 +1,7 @@
 package hello.core;
 
 import hello.core.discount.DiscountPolicy;
+import hello.core.discount.FixDiscountPolicy;
 import hello.core.discount.RateDiscountPolicy;
 import hello.core.member.MemberRepository;
 import hello.core.member.MemberService;
@@ -12,29 +13,33 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 
-// 애플리케이션의 구성 정보를 담당하는 설정 정보에 붙이는 애너테이션
 @Configuration
 public class AppConfig {
 
-    // @Bean은 스프링 컨테이너에 등록할 때 사용하는 애너테이션
-    @Bean
-    public MemberService memberService() {
-        return new MemberServiceImpl(memberRepository());
-    }
-
     @Bean
     public MemberRepository memberRepository() {
+        System.out.println("call AppConfig.memberRepository");
         return new MemoryMemberRepository();
     }
 
     @Bean
-    public OrderService orderService() {
-        return new OrderServiceImpl(memberRepository(), discountPolicy());
+    public DiscountPolicy discountPolicy() {
+        return new FixDiscountPolicy();
     }
 
-    @Bean
-    public DiscountPolicy discountPolicy() {
+    @Bean DiscountPolicy discountPolicy2() {
         return new RateDiscountPolicy();
     }
 
+    @Bean
+    public MemberService memberService() {
+        System.out.println("call AppConfig.memberService");
+        return new MemberServiceImpl(memberRepository());
+    }
+
+    @Bean
+    public OrderService orderService() {
+        System.out.println("call AppConfig.orderService");
+        return new OrderServiceImpl(memberRepository(), discountPolicy2());
+    }
 }
