@@ -1,7 +1,10 @@
 package hello.core.scan;
 
 import hello.core.AutoAppConfig;
+import hello.core.member.MemberRepository;
 import hello.core.member.MemberService;
+import hello.core.order.OrderService;
+import hello.core.order.OrderServiceImpl;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -41,5 +44,12 @@ public class AutoAppConfigTest {
     void basicScan() {
         MemberService memberService = ac.getBean(MemberService.class);
         assertThat(memberService).isInstanceOf(MemberService.class);
+
+        OrderServiceImpl orderService = ac.getBean("orderServiceImpl", OrderServiceImpl.class);
+        MemberRepository memberRepository = orderService.getMemberRepository();
+
+        assertThat(memberRepository).isNotNull();
+
+
     }
 }
