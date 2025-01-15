@@ -2,7 +2,9 @@ package hello.core;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
+import jakarta.inject.Provider;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -34,28 +36,20 @@ public class SingletonWithPrototypeTest1 {
         int count1 = clientBean1.logic();
         assertThat(count1).isEqualTo(1);
 
-        ClientBean clientBean2 = ac.getBean(ClientBean.class);/
+        ClientBean clientBean2 = ac.getBean(ClientBean.class);
         int count2 = clientBean2.logic();
-        assertThat(count2).isEqualTo(2);
+        assertThat(count2).isEqualTo(1);
     }
 
     @Scope("singleton")
     static class ClientBean {
-        private final ProtoTypeBean protoTypeBean;
-
-//        @Autowired
-//        ApplicationContext ac;
 
         @Autowired
-        public ClientBean(ProtoTypeBean protoTypeBean) {
-            // 생성 시점에 프로토타입빈이 등록됨
-            this.protoTypeBean = protoTypeBean;
-        }
+        private Provider<ProtoTypeBean> protoTypeBeanProvider;
 
         public int logic() {
             // 생성 시점에 등록된 프로토타입을 계속 사용
-            // 가장 단순 무식한 방법으로 protoTypeBean은 logic 메서드 안에서 주입 받으면 된다. (코드가 지저분함), 다른 좋은 방법들 존재
-//            ProtoTypeBean protoTypeBean = ac.getBean(ProtoTypeBean.class);
+            ProtoTypeBean protoTypeBean = protoTypeBeanProvider.get();
             protoTypeBean.addCount();
             return protoTypeBean.getCount();
         }
