@@ -3,7 +3,11 @@ package yoo.study.member;
 public class MemberServiceImpl implements MemberService {
 
     // DIP 위반 - MemberRepository에만 의존하지 않고 구현체인 MemoryMemberRepository에도 의존하고 있음
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    private final MemberRepository memberRepository;
+
+    public MemberServiceImpl(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
 
     @Override
     public void join(Member member) {
