@@ -3,6 +3,7 @@ package yoo.study;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import yoo.study.discount.DiscountPolicy;
+import yoo.study.discount.FixDiscountPolicy;
 import yoo.study.discount.RateDiscountPolicy;
 import yoo.study.member.MemberRepository;
 import yoo.study.member.MemberService;
@@ -25,6 +26,11 @@ public class AppConfig {
     @Bean
     public DiscountPolicy discountPolicy() {
         return new RateDiscountPolicy();
+    }
+
+    @Bean
+    public DiscountPolicy discountPolicy2() {
+        return new FixDiscountPolicy();
     }
 
     @Bean
