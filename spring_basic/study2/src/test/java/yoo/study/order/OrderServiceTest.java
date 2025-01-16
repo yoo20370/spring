@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import yoo.study.AppConfig;
 import yoo.study.member.*;
 
@@ -15,9 +16,13 @@ public class OrderServiceTest {
 
     @BeforeEach
     void beforeEach() {
-        AppConfig appConfig = new AppConfig();
-        memberService = appConfig.memberService();
-        orderService = appConfig.orderService();
+//        AppConfig appConfig = new AppConfig();
+//        memberService = appConfig.memberService();
+//        orderService = appConfig.orderService();
+
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+        memberService = ac.getBean(MemberService.class);
+        orderService = ac.getBean(OrderService.class);
     }
 
     @Test
