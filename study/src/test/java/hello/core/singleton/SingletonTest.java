@@ -1,6 +1,7 @@
 package hello.core.singleton;
 
 import hello.core.AppConfig;
+import hello.core.AutoAppConfig;
 import hello.core.member.MemberRepository;
 import hello.core.member.MemberService;
 import hello.core.member.MemberServiceImpl;
@@ -73,12 +74,12 @@ public class SingletonTest {
     @Test
     @DisplayName("서로 다른 객체 속에 사용되는 같은 타입의 객체는 동일한 객체이다.")
     void singletonTest() {
-        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AutoAppConfig.class);
 
-        MemberServiceImpl memberService = ac.getBean("memberService", MemberServiceImpl.class);
-        OrderServiceImpl orderService = ac.getBean("orderService", OrderServiceImpl.class);
+        MemberServiceImpl memberService = ac.getBean(MemberServiceImpl.class);
+        OrderServiceImpl orderService = ac.getBean(OrderServiceImpl.class);
 
-        MemberRepository memberRepository1 = ac.getBean("memberRepository", MemberRepository.class);
+        MemberRepository memberRepository1 = ac.getBean(MemberRepository.class);
         MemberRepository memberRepository2 = memberService.getMemberRepository();
         MemberRepository memberRepository3 = orderService.getMemberRepository();
 
@@ -89,12 +90,12 @@ public class SingletonTest {
     @Test
     @DisplayName("@Configuration 애너테이션을 붙이지 않는 경우 - 스프링 컨테이너에 @Bean이 붙은 메서드는 실행되어 빈이 등록되지만 싱글톤 패턴을 보장하지 않음")
     void configurationTest() {
-        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AutoAppConfig.class);
 
-        MemberServiceImpl memberService = ac.getBean("memberService", MemberServiceImpl.class);
-        OrderServiceImpl orderService = ac.getBean("orderService", OrderServiceImpl.class);
+        MemberServiceImpl memberService = ac.getBean(MemberServiceImpl.class);
+        OrderServiceImpl orderService = ac.getBean(OrderServiceImpl.class);
 
-        MemberRepository memberRepository1 = ac.getBean("memberRepository", MemberRepository.class);
+        MemberRepository memberRepository1 = ac.getBean(MemberRepository.class);
         MemberRepository memberRepository2 = memberService.getMemberRepository();
         MemberRepository memberRepository3 = orderService.getMemberRepository();
 

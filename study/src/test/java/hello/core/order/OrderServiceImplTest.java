@@ -2,6 +2,7 @@ package hello.core.order;
 
 
 import hello.core.AppConfig;
+import hello.core.AutoAppConfig;
 import hello.core.member.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,9 +17,9 @@ class OrderServiceImplTest {
 
     @BeforeEach
     void beforeEach() {
-        ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
-        memberService = ac.getBean("memberService", MemberService.class);
-        orderService = ac.getBean("orderService", OrderService.class);
+        ApplicationContext ac = new AnnotationConfigApplicationContext(AutoAppConfig.class);
+        memberService = ac.getBean("memberServiceImpl", MemberService.class);
+        orderService = ac.getBean("orderServiceImpl", OrderService.class);
     }
 
     @Test
