@@ -1,9 +1,10 @@
 package yoo.study.discount;
 
-import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Component;
 import yoo.study.member.Grade;
 import yoo.study.member.Member;
 
+@Component
 public class RateDiscountPolicy implements DiscountPolicy{
 
     int discountPercent = 10;
