@@ -14,32 +14,22 @@ public class StatefulServiceTest {
         StatefulService userA = ac.getBean(StatefulService.class);
         StatefulService userB = ac.getBean(StatefulService.class);
 
-        userA.order("userA", 10000);
+        int price1 = userA.order("userA", 10000);
 
-        userB.order("userA", 20000);
+        int price2 = userB.order("userB", 20000);
 
-        Assertions.assertThat(userA.getPrice()).isEqualTo(10000);
+        Assertions.assertThat(price1).isEqualTo(10000);
 
-        Assertions.assertThat(userB.getPrice()).isEqualTo(20000);
+        Assertions.assertThat(price2).isEqualTo(20000);
 
 
     }
 
     static class StatefulService {
 
-        private int price;
-
-        public int getPrice() {
-            return price;
-        }
-
-        public void setPrice(int price) {
-            this.price = price;
-        }
-
-        public void order(String userName, int price) {
+        public int order(String userName, int price) {
             System.out.println(userName + "님이 주문한 금액은 : " + price + "원 입니다.");
-            this.setPrice(price);
+            return price;
         }
     }
 }
