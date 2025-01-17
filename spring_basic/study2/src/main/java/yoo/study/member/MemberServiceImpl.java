@@ -7,13 +7,19 @@ import org.springframework.stereotype.Component;
 @Component
 public class MemberServiceImpl implements MemberService {
 
-    // DIP 위반 - MemberRepository에만 의존하지 않고 구현체인 MemoryMemberRepository에도 의존하고 있음
-    private final MemberRepository memberRepository;
+
+    private MemberRepository memberRepository;
 
     @Autowired
-    public MemberServiceImpl(MemberRepository memberRepository) {
+    public void setMemberRepository(MemberRepository memberRepository) {
+        System.out.println("Auto Setter DI");
         this.memberRepository = memberRepository;
     }
+
+//    @Autowired
+//    public MemberServiceImpl(MemberRepository memberRepository) {
+//        this.memberRepository = memberRepository;
+//    }
 
     @Override
     public void join(Member member) {
