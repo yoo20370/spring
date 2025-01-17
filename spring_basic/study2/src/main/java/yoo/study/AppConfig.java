@@ -36,8 +36,7 @@ public class AppConfig {
 
     @Bean(initMethod = "init")
     public MemberService memberService() {
-        //return new MemberServiceImpl(memberRepository());
-        return null;
+        return new MemberServiceImpl(memberRepository());
     }
 
     @Bean(initMethod = "init")
