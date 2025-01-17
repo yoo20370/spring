@@ -13,6 +13,7 @@ import yoo.study.order.OrderService;
 import yoo.study.order.OrderServiceImpl;
 
 
+
 @Configuration
 public class AppConfig {
     // 객체를 생성하고 연결해주는 역할을 수행하는 설정 정보
@@ -33,7 +34,7 @@ public class AppConfig {
         return new FixDiscountPolicy();
     }
 
-    @Bean
+    @Bean(initMethod = "init")
     public MemberService memberService() {
         return new MemberServiceImpl(memberRepository());
     }

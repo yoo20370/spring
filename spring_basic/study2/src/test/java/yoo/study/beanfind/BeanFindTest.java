@@ -42,10 +42,12 @@ public class BeanFindTest {
         for (String beanDefinitionName : beanDefinitionNames) {
             BeanDefinition beanDefinition = ac.getBeanDefinition(beanDefinitionName);
 
-            if (beanDefinition.getRole() == BeanDefinition.ROLE_APPLICATION) {
-                Object bean = ac.getBean(beanDefinitionName);
-                System.out.println("bean = " + bean + "beanDefinitionName = " + beanDefinitionName);
-            }
+            System.out.println("beanDefinition = " + beanDefinition);
+
+//            if (beanDefinition.getRole() == BeanDefinition.ROLE_APPLICATION) {
+//                Object bean = ac.getBean(beanDefinitionName);
+//                System.out.println("bean = " + bean + "beanDefinitionName = " + beanDefinitionName);
+//            }
         }
     }
 

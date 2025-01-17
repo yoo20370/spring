@@ -1,5 +1,7 @@
 package yoo.study.member;
 
+import jakarta.annotation.PostConstruct;
+
 public class MemberServiceImpl implements MemberService {
 
     // DIP 위반 - MemberRepository에만 의존하지 않고 구현체인 MemoryMemberRepository에도 의존하고 있음
@@ -17,5 +19,10 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Member findMember(Long id) {
         return memberRepository.findById(id);
+    }
+
+
+    public void init() {
+        System.out.println("MemberServiceImpl.init");
     }
 }

@@ -1,5 +1,6 @@
 package yoo.study.discount;
 
+import org.springframework.context.annotation.Primary;
 import yoo.study.member.Grade;
 import yoo.study.member.Member;
 
