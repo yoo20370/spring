@@ -4,6 +4,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Scope;
@@ -51,25 +52,46 @@ public class ProtoTypeBeanTest {
         assertThat(singletonScopeBean1.getProtoTypeBean()).isSameAs(singletonScopeBean2.getProtoTypeBean());
     }
 
+    @Test
+    @DisplayName("스프링이 제공하는 ObjectProvider를 사용하면 실제 객체가 필요할 때 DL을 수행하여 사용 가능")
+    void protoTypeFind2() {
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(SingletonScopeBean.class, ProtoTypeBean.class);
+
+        SingletonScopeBean singletonScopeBean1 = ac.getBean(SingletonScopeBean.class);
+        SingletonScopeBean singletonScopeBean2 = ac.getBean(SingletonScopeBean.class);
+
+        int count1 = singletonScopeBean1.logic();
+        System.out.println("count1 = " + count1);
+        assertThat(count1).isEqualTo(1);
+
+        int count2 = singletonScopeBean2.logic();
+        System.out.println("count2 = " + count2);
+        assertThat(count2).isEqualTo(1);
+
+        assertThat(singletonScopeBean1.getProtoTypeBean()).isNotSameAs(singletonScopeBean2.getProtoTypeBean());
+    }
+
     @Scope("singleton")
     static class SingletonScopeBean {
 
         // 해당 객체는 싱글톤 객체가 생성될 때 스프링 컨테이너가 생성 및 DI 한 후 반환해주는 객체
         // 프로토타입 빈으로 컨테이너를 조회할 때마다 새로 생성되는 것, 지금은 싱글톤 빈이 컨테이너에 있는지 조회하는 경우임
         // SingletonScopeBean 해당 프로토타입 스코프 빈의 참조값을 가지고 있음
-        private final ProtoTypeBean protoTypeBean;
+        private final ObjectProvider<ProtoTypeBean> protoTypeBeanProvider;
 
         @Autowired
-        public SingletonScopeBean(ProtoTypeBean protoTypeBean) {
-            this.protoTypeBean = protoTypeBean;
+        public SingletonScopeBean(ObjectProvider<ProtoTypeBean> protoTypeBeanProvider) {
+            this.protoTypeBeanProvider = protoTypeBeanProvider;
         }
 
         public int logic() {
+            ProtoTypeBean protoTypeBean = protoTypeBeanProvider.getObject();
             protoTypeBean.addCount();
             return protoTypeBean.getCount();
         }
 
         public ProtoTypeBean getProtoTypeBean() {
+            ProtoTypeBean protoTypeBean = protoTypeBeanProvider.getObject();
             return protoTypeBean;
         }
 
