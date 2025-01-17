@@ -7,14 +7,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class MemberServiceImpl implements MemberService {
 
-
+    // 필드 주입의 경우 스프링 컨테이너에 의존적
+    // 즉, 자바 순수 코드로 테스트 코드 작성 시, 외부에서 변경이 불가능하므로 테스트 코드 작성이 어렵다.
+    @Autowired
     private MemberRepository memberRepository;
 
-    @Autowired
-    public void setMemberRepository(MemberRepository memberRepository) {
-        System.out.println("Auto Setter DI");
-        this.memberRepository = memberRepository;
-    }
+//    @Autowired
+//    public void setMemberRepository(MemberRepository memberRepository) {
+//        System.out.println("Auto Setter DI");
+//        this.memberRepository = memberRepository;
+//    }
 
 //    @Autowired
 //    public MemberServiceImpl(MemberRepository memberRepository) {
