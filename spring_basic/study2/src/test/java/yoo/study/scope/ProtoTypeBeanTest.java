@@ -54,6 +54,9 @@ public class ProtoTypeBeanTest {
     @Scope("singleton")
     static class SingletonScopeBean {
 
+        // 해당 객체는 싱글톤 객체가 생성될 때 스프링 컨테이너가 생성 및 DI 한 후 반환해주는 객체
+        // 프로토타입 빈으로 컨테이너를 조회할 때마다 새로 생성되는 것, 지금은 싱글톤 빈이 컨테이너에 있는지 조회하는 경우임
+        // SingletonScopeBean 해당 프로토타입 스코프 빈의 참조값을 가지고 있음
         private final ProtoTypeBean protoTypeBean;
 
         @Autowired
