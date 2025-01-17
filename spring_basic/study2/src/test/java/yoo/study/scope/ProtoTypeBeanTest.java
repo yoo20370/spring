@@ -4,8 +4,10 @@ import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Scope;
+import yoo.study.singleton.SingletonBean;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -30,8 +32,67 @@ public class ProtoTypeBeanTest {
         assertThat(protoTypeBean2).isNotSameAs(protoTypeBean3);
     }
 
+    @Test
+    @DisplayName("싱글톤 스코프 빈 안의 프로토타입 빈의 경우 의존성 주입 때 생성된 객체이다.")
+    void protoTypeFind() {
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(SingletonScopeBean.class, ProtoTypeBean.class);
+
+        SingletonScopeBean singletonScopeBean1 = ac.getBean(SingletonScopeBean.class);
+        SingletonScopeBean singletonScopeBean2 = ac.getBean(SingletonScopeBean.class);
+
+        int count1 = singletonScopeBean1.logic();
+        System.out.println("count1 = " + count1);
+        assertThat(count1).isEqualTo(1);
+
+        int count2 = singletonScopeBean2.logic();
+        System.out.println("count2 = " + count2);
+        assertThat(count2).isEqualTo(2);
+
+        assertThat(singletonScopeBean1.getProtoTypeBean()).isSameAs(singletonScopeBean2.getProtoTypeBean());
+    }
+
+    @Scope("singleton")
+    static class SingletonScopeBean {
+
+        private final ProtoTypeBean protoTypeBean;
+
+        @Autowired
+        public SingletonScopeBean(ProtoTypeBean protoTypeBean) {
+            this.protoTypeBean = protoTypeBean;
+        }
+
+        public int logic() {
+            protoTypeBean.addCount();
+            return protoTypeBean.getCount();
+        }
+
+        public ProtoTypeBean getProtoTypeBean() {
+            return protoTypeBean;
+        }
+
+        @PostConstruct
+        public void init() {
+
+        }
+
+        @PreDestroy
+        public void close() {
+
+        }
+    }
+
     @Scope("prototype")
     static class ProtoTypeBean {
+
+        private int count = 0;
+
+        public void addCount() {
+            count++;
+        }
+
+        public int getCount() {
+            return count;
+        }
 
         @PostConstruct
         public void init() {
