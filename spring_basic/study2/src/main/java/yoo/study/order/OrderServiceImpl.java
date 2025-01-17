@@ -11,13 +11,8 @@ import yoo.study.member.MemberServiceImpl;
 
 public class OrderServiceImpl implements OrderService {
 
-    // 직접 참조를 제거하여 DIP를 지킴
-    // 외부에서 AppConfig를 통해서 의존관계에 있는 객체를 주입해줌으로써 OCP를 지킴
     private final MemberRepository memberRepository;
     private final DiscountPolicy discountPolicy;
-    // OCP 위반 - 할인 정책만 교체했을 뿐인데, 클라이언트인 OrderServiceImpl의 코드가 변경됨 -> 관심사 분리 필요
-//    private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
-
 
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
@@ -34,5 +29,20 @@ public class OrderServiceImpl implements OrderService {
 
         // Order 객체 만들어서 반환
         return new Order(memberId, itemName, price, discountPrice);
+    }
+
+    @Override
+    public MemberRepository getMemberRepository() {
+        return memberRepository;
+    }
+
+    @Override
+    public void init() {
+
+    }
+
+    @Override
+    public void destroy() {
+
     }
 }

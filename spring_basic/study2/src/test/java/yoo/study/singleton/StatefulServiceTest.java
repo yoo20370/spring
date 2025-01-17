@@ -15,14 +15,10 @@ public class StatefulServiceTest {
         StatefulService userB = ac.getBean(StatefulService.class);
 
         int price1 = userA.order("userA", 10000);
-
         int price2 = userB.order("userB", 20000);
 
         Assertions.assertThat(price1).isEqualTo(10000);
-
         Assertions.assertThat(price2).isEqualTo(20000);
-
-
     }
 
     static class StatefulService {

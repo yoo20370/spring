@@ -6,5 +6,9 @@ public interface MemberService {
 
     Member findMember(Long id);
 
+    MemberRepository getMemberRepository();
+
     void init();
+
+    void destroy();
 }

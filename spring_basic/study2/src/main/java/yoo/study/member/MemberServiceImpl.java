@@ -21,8 +21,16 @@ public class MemberServiceImpl implements MemberService {
         return memberRepository.findById(id);
     }
 
+    @Override
+    public MemberRepository getMemberRepository(){
+        return memberRepository;
+    }
 
     public void init() {
         System.out.println("MemberServiceImpl.init");
+    }
+
+    public void destroy(){
+
     }
 }
