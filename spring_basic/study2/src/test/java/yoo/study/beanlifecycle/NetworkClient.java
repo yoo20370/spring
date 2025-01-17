@@ -1,9 +1,7 @@
 package yoo.study.beanlifecycle;
 
-import org.springframework.beans.factory.DisposableBean;
-import org.springframework.beans.factory.InitializingBean;
-
-import java.util.UUID;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 
 public class NetworkClient {
     private String url;
@@ -30,11 +28,13 @@ public class NetworkClient {
         System.out.println("NetworkClient.disConnect " + url);
     }
 
+    @PostConstruct
     public void init() throws Exception {
         connect();
         call("초기화 연결 메서드");
     }
 
+    @PreDestroy
     public void close() throws Exception {
         disConnect();
     }
