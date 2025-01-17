@@ -1,7 +1,6 @@
 package yoo.study.web;
 
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,18 +10,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class WebController {
 
     private final WebService webService;
-    private final ObjectProvider<MyLogger> myLoggerProvider;
+    private final MyLogger myLogger;
 
     @Autowired
-    public WebController(WebService webService, ObjectProvider<MyLogger> myLoggerProvider) {
+    public WebController(WebService webService, MyLogger myLogger) {
         this.webService = webService;
-        this.myLoggerProvider = myLoggerProvider;
+        this.myLogger = myLogger;
     }
 
     @RequestMapping("log-demo")
     @ResponseBody
     public String logDemo(HttpServletRequest request) {
-        MyLogger myLogger = myLoggerProvider.getObject();
         myLogger.setRequestURL(request.getRequestURL().toString());
 
         myLogger.log("controller test");
