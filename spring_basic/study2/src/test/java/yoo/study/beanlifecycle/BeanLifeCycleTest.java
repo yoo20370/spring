@@ -20,7 +20,7 @@ public class BeanLifeCycleTest {
 
         // 객체 생성은 객체를 생성해서 필수값들을 설정하는 것까지 구현하는 것이 좋다.
         // DB를 연결하거나 하는 작업은 무거운 작업이므로 객체 생성에 넣지 말고 초기화 작업에서 수행하는 것이 좋다.
-        @Bean
+        @Bean(initMethod = "init", destroyMethod = "close")
         public NetworkClient networkClient() {
             NetworkClient networkClient = new NetworkClient();
             networkClient.setUrl("http://yoo-stude.dev");
