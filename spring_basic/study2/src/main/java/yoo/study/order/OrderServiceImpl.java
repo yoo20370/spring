@@ -1,19 +1,18 @@
 package yoo.study.order;
-
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import yoo.study.discount.DiscountPolicy;
-import yoo.study.discount.FixDiscountPolicy;
-import yoo.study.discount.RateDiscountPolicy;
 import yoo.study.member.Member;
 import yoo.study.member.MemberRepository;
-import yoo.study.member.MemberService;
-import yoo.study.member.MemberServiceImpl;
 
+
+@Component
 public class OrderServiceImpl implements OrderService {
 
     private final MemberRepository memberRepository;
     private final DiscountPolicy discountPolicy;
 
+    @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;

@@ -39,7 +39,7 @@ public class AppConfig {
         return new MemberServiceImpl(memberRepository());
     }
 
-    @Bean
+    @Bean(initMethod = "init")
     public OrderService orderService() {
         return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
