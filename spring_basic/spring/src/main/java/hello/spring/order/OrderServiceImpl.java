@@ -5,14 +5,16 @@ import hello.spring.discountpolicy.FixDiscountPolicy;
 import hello.spring.member.Member;
 import hello.spring.member.MemberRepository;
 import hello.spring.member.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-
-// 전력 디자인 패턴
+@Component
 public class OrderServiceImpl implements OrderService{
 
     private final MemberRepository memberRepository;
     private final DiscountPolicy discountPolicy;
 
+    @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
@@ -25,5 +27,10 @@ public class OrderServiceImpl implements OrderService{
         Integer discountPrice = discountPolicy.getDiscountPrice(member, price);
 
         return new Order(itemName, memberId, price, discountPrice);
+    }
+
+    @Override
+    public MemberRepository getMemberRepository() {
+        return memberRepository;
     }
 }

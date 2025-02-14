@@ -2,14 +2,11 @@ package hello.spring.bean;
 
 import hello.spring.AppConfig;
 import hello.spring.discountpolicy.DiscountPolicy;
-import hello.spring.member.MemberRepository;
 import hello.spring.member.MemberService;
-import hello.spring.member.MemberServiceImpl;
 import hello.spring.order.OrderService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.NoUniqueBeanDefinitionException;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -78,6 +75,13 @@ public class findBeanTest {
 
         }
         Assertions.assertThat(beans.size()).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("BeanDefinition 출력해보기")
+    void printBeanDefinition() {
+        BeanDefinition beanDefinition = ac.getBeanDefinition("memberService");
+        System.out.println("beanDefinition = " + beanDefinition);
     }
 
 }
