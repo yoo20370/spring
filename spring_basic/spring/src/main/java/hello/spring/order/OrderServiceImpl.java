@@ -2,10 +2,12 @@ package hello.spring.order;
 
 import hello.spring.discountpolicy.DiscountPolicy;
 import hello.spring.discountpolicy.FixDiscountPolicy;
+import hello.spring.discountpolicy.MainDiscountPolicy;
 import hello.spring.member.Member;
 import hello.spring.member.MemberRepository;
 import hello.spring.member.MemoryMemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -15,7 +17,7 @@ public class OrderServiceImpl implements OrderService{
     private final DiscountPolicy discountPolicy;
 
     @Autowired
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+    public OrderServiceImpl(MemberRepository memberRepository,@MainDiscountPolicy DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }

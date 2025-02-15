@@ -2,7 +2,12 @@ package hello.spring.discountpolicy;
 
 import hello.spring.member.Grade;
 import hello.spring.member.Member;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Component;
 
+@Component
+@MainDiscountPolicy
 public class FixDiscountPolicy implements DiscountPolicy {
 
     @Override

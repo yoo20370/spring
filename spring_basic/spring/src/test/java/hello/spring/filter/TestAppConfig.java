@@ -26,6 +26,7 @@ public class TestAppConfig {
         assertThrows(NoSuchBeanDefinitionException.class, () -> ac.getBean(BeanB.class));
     }
 
+
     @Test
     void findAllBean() {
         AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(TestAppConfig.class);
