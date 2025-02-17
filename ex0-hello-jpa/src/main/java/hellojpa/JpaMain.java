@@ -21,15 +21,17 @@ public class JpaMain {
 
         try {
 
-            List<Member> selectMFromMember = em.createQuery("SELECT m FROM Member as m", Member.class)
-                    .setFirstResult(5)
-                    .setMaxResults(8)
-                    .getResultList();
+            Member member = em.find(Member.class, 150L);
+            member.setName("AAAAAA");
 
-            for (Member member : selectMFromMember) {
-                System.out.println("member = " + member);
-            }
-            
+            em.clear();
+            // JPA에서 member를 관리하지 않음
+            // 데이터베이스 커밋이 일어날 때, 해당 객체에 대해서는 아무 일도 일어나지 않는다.
+            // JPA에서 관리하지 않기 때문
+            // 여기서는 update문이 날아가지 않음
+
+            System.out.println("========================");
+
             ts.commit();
         } catch (Exception e) {
             ts.rollback();
