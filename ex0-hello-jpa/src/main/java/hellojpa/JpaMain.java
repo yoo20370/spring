@@ -7,7 +7,6 @@ public class JpaMain {
 
     public static void main(String[] args) {
 
-
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
 
         // 데이터베이스 커넥션 하나 받았다고 생각하면 편하다.
@@ -20,11 +19,20 @@ public class JpaMain {
 
         try {
             Member member = new Member();
-            member.setId(1L);
             member.setUsername("A");
-            member.setRoleType(RoleType.USER);
+            Member member2 = new Member();
+            member.setUsername("A");
+            Member member3 = new Member();
+            member.setUsername("A");
+            Member member4 = new Member();
+            member.setUsername("A");
 
             em.persist(member);
+            em.persist(member2);
+            em.persist(member3);
+            em.persist(member4);
+
+            ts.commit();
         } catch (Exception e) {
             ts.rollback();
         } finally {
