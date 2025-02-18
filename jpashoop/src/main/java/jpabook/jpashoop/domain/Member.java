@@ -1,15 +1,18 @@
 package jpabook.jpashoop.domain;
 
 import jakarta.persistence.*;
+import org.hibernate.dialect.function.array.ArrayArgumentValidator;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Member {
     @Id
     @GeneratedValue()
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+
     @Column(name="MEMBER_ID")
     private Long id;
-
 
     private String name;
 
@@ -22,7 +25,11 @@ public class Member {
 
     private String zipcode;
 
+    @OneToMany(mappedBy = "member")
+    private List<Order> orders = new ArrayList<>();
+
     public Member() { }
+
 
     public Long getId() {
         return id;
@@ -62,5 +69,13 @@ public class Member {
 
     public void setZipcode(String zipcode) {
         this.zipcode = zipcode;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }

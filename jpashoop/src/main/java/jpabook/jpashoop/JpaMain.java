@@ -1,6 +1,8 @@
 package jpabook.jpashoop;
 
 import jakarta.persistence.*;
+import jpabook.jpashoop.domain.Order;
+import jpabook.jpashoop.domain.OrderItem;
 
 
 public class JpaMain {
@@ -18,6 +20,10 @@ public class JpaMain {
         ts.begin();
 
         try {
+
+            Order order = new Order();
+            order.addOrderItem(new OrderItem());
+
 
             ts.commit();
         } catch (Exception e) {
