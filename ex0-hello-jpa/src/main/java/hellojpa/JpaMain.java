@@ -2,7 +2,6 @@ package hellojpa;
 
 import jakarta.persistence.*;
 
-import java.util.List;
 
 public class JpaMain {
 
@@ -20,19 +19,12 @@ public class JpaMain {
         ts.begin();
 
         try {
+            Member member = new Member();
+            member.setId(1L);
+            member.setUsername("A");
+            member.setRoleType(RoleType.USER);
 
-            Member member = em.find(Member.class, 150L);
-            member.setName("AAAAAA");
-
-            em.clear();
-            // JPA에서 member를 관리하지 않음
-            // 데이터베이스 커밋이 일어날 때, 해당 객체에 대해서는 아무 일도 일어나지 않는다.
-            // JPA에서 관리하지 않기 때문
-            // 여기서는 update문이 날아가지 않음
-
-            System.out.println("========================");
-
-            ts.commit();
+            em.persist(member);
         } catch (Exception e) {
             ts.rollback();
         } finally {
