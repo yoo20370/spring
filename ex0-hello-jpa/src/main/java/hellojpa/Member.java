@@ -1,13 +1,22 @@
 package hellojpa;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
+
+// JPA가 관리하는 객체가 된다.
+// 데이터베이스 테이블과 매핑해서 사용
 @Entity
+// 해당 객체를 MBR 테이블과 매핑
+@Table(name="MBR")
 public class Member {
 
     @Id
     private Long id;
+
+    @Column(unique = true, length = 10)
     private String name;
 
     // JPA는 기본적으로 내부적으로 리플렉션 등을 사용하므로
