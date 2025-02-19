@@ -1,8 +1,10 @@
 package jpabook.jpashoop;
 
 import jakarta.persistence.*;
-import jpabook.jpashoop.domain.Order;
-import jpabook.jpashoop.domain.OrderItem;
+import jpabook.jpashoop.domain.Member;
+import jpabook.jpashoop.domain.Movie;
+
+import java.time.LocalDateTime;
 
 
 public class JpaMain {
@@ -21,9 +23,15 @@ public class JpaMain {
 
         try {
 
-            Order order = new Order();
-            order.addOrderItem(new OrderItem());
+            Member member = new Member();
+            member.setName("user1");
+            member.setCreateBy("kim");
+            member.setCreatedDate(LocalDateTime.now());
 
+            em.persist(member);
+
+            em.flush();
+            em.clear();
 
             ts.commit();
         } catch (Exception e) {
