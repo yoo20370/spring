@@ -2,6 +2,7 @@ package jpabook.study.domain;
 
 import jakarta.persistence.*;
 
+
 @Entity
 public class Delivery extends BaseEntity {
 
@@ -12,6 +13,9 @@ public class Delivery extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private DeliveryStatus deliveryStatus;
+
+    @OneToOne(mappedBy = "delivery", fetch = FetchType.LAZY)
+    private Order order;
 
     private String city;
     private String street;
