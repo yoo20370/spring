@@ -3,7 +3,7 @@ package jpabook.study.domain;
 import jakarta.persistence.*;
 
 @Entity
-public class Delivery extends EntityAddress{
+public class Delivery extends BaseEntity {
 
     @Id
     @GeneratedValue
@@ -12,6 +12,10 @@ public class Delivery extends EntityAddress{
 
     @Enumerated(EnumType.STRING)
     private DeliveryStatus deliveryStatus;
+
+    private String city;
+    private String street;
+    private String zipcode;
 
     public Delivery() {
 
@@ -31,5 +35,29 @@ public class Delivery extends EntityAddress{
 
     public void setDeliveryStatus(DeliveryStatus deliveryStatus) {
         this.deliveryStatus = deliveryStatus;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getZipcode() {
+        return zipcode;
+    }
+
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
     }
 }

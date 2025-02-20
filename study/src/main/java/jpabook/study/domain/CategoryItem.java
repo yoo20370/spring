@@ -3,7 +3,7 @@ package jpabook.study.domain;
 import jakarta.persistence.*;
 
 @Entity
-public class CategoryItem {
+public class CategoryItem extends BaseEntity {
     @Id
     @GeneratedValue
     @Column(name = "CATEGORY_ITEM_ID")

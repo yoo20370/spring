@@ -5,6 +5,8 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 
+import java.util.List;
+
 public class JpaMain {
 
     public static void main(String[] args) {
@@ -16,21 +18,31 @@ public class JpaMain {
 
         ts.begin();
         try {
+//            Category category = new Category();
+//            category.setName("노트북");
+//
+//            em.persist(category);
+//
+//            Item item = new Album();
+//            item.setName("맥북 16인치");
+//
+//            CategoryItem categoryItem = new CategoryItem();
+//            categoryItem.setCategory(category);
+//            categoryItem.setItem(item);
+//
+//            em.persist(item);
+//            em.persist(categoryItem);
+//
+//            Item findItem = em.find(Item.class, 1L);
+//            List<CategoryItem> categoryItems = findItem.getCategoryItems();
+//            for (CategoryItem categoryItem : categoryItems) {
+//                System.out.println("categoryItem.getItem().getName() = " + categoryItem.getItem().getName());
+//            }
+            Book book = new Book();
+            book.setName("JPA");
+            book.setAuthor("김영한");
 
-            Category category = new Category();
-            category.setName("노트북");
-
-            em.persist(category);
-
-            Item item = new Album();
-            item.setName("맥북 16인치");
-
-            CategoryItem categoryItem = new CategoryItem();
-            categoryItem.setCategory(category);
-            categoryItem.setItem(item);
-
-            em.persist(item);
-            em.persist(categoryItem);
+            em.persist(book);
 
             ts.commit();
         } catch (Exception e) {
