@@ -18,23 +18,10 @@ public class JpaMain {
         ts.begin();
         try {
 
-            Address address = new Address("city", "street", "100");
+            Address address1 = new Address("city", "street", "zipcode");
+            Address address2 = new Address("city", "street", "zipcode");
 
-            Member member1 = new Member();
-            member1.setName("member1");
-            member1.setHomeAddress(address);
-
-            Address copyAddress = new Address(address.getCity(), address.getStreet(), address.getZipcode());
-
-            Member member2 = new Member();
-            member2.setName("member2");
-            member2.setHomeAddress(copyAddress);
-
-            em.persist(member1);
-            em.persist(member2);
-
-            // 업데이트 쿼리가 두 번 나감, 이런 버그는 잡기 어렵다.
-            // 하나의 임베디드 타입을 공유하기 때문
+            System.out.println(address1.equals(address2));
 
 
             ts.commit();
