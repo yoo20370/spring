@@ -14,7 +14,7 @@ public class CategoryItem {
     @JoinColumn(name = "ITEM_ID")
     private Item item;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "CATEGORY_ID")
     private Category category;
 

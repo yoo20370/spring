@@ -56,7 +56,6 @@ public class JpaMain {
 //            Member findMember = em.find(Member.class, member.getId());
 //            em.remove(findMember);
 
-
             ts.commit();
         } catch (Exception e) {
             ts.rollback();
