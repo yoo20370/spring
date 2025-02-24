@@ -17,36 +17,56 @@ public class JpaMain {
         ts.begin();
         try {
 
-            Team team = new Team();
-            team.setName("A");
-            em.persist(team);
+            Team teamA = new Team();
+            teamA.setName("팀A");
 
-            Member member = new Member();
-            member.setAge(10);
-            member.changeTeam(team);
-            member.setType(MemberType.ADMIN);
-            member.setAddress(new Address("city", "street", "zipcode"));
+            Team teamB = new Team();
+            teamB.setName("팀B");
 
-            for (int i = 0; i < 100; i++) {
-                Member m = new Member();
-                m.setAge(i+10);
-                m.setUsername(i + "");
+            Team teamC = new Team();
+            teamC.setName("팀C");
 
-                em.persist(m);
-            }
+            em.persist(teamA);
+            em.persist(teamB);
+            em.persist(teamC);
 
-            em.persist(member);
+
+            Member member1 = new Member();
+            member1.setUsername("회원1");
+            member1.setTeam(teamA);
+
+            Member member2 = new Member();
+            member2.setUsername("회원2");
+            member2.setTeam(teamA);
+
+            Member member3 = new Member();
+            member3.setUsername("회원3");
+            member3.setTeam(teamB);
+
+            Member member4 = new Member();
+            member4.setUsername("회원4");
+
+            em.persist(member1);
+            em.persist(member2);
+            em.persist(member3);
+            em.persist(member4);
 
             em.flush();
             em.clear();
 
-            // m.username은 상태 필드
-            String query = "SELECT t.members FROM Team t";
+            String jpqlQuery = "SELECT m FROM Member m INNER JOIN FETCH m.team";
 
-            List<Object> resultList = em.createQuery(query)
-                    .getResultList();
-            for (Object object : resultList) {
-                System.out.println("object = " + object);
+            List<Member> members = em.createQuery(jpqlQuery, Member.class).getResultList();
+            for (Member m : members) {
+                System.out.print("m.getUsername() = " + m.getUsername() + " ");
+                System.out.println("m.getUsername() = " + m.getTeam().getName());
+            }
+
+            String jpqlQuery2 = "SELECT DISTINCT t FROM Team t INNER JOIN FETCH t.members";
+
+            List<Team> teams = em.createQuery(jpqlQuery2, Team.class).getResultList();
+            for (Team team : teams) {
+                System.out.println("team.getName() = " + team.getName() +" " + team.getMembers());
             }
 
             ts.commit();
