@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 
 @Entity
 @NamedQuery(
-        name = "Member.findByUserName",
-        query = "SELECT m FROM Member m WHERE m.username = :username"
+        name = "Member.getTeam",
+        query = "select m from Member m join fetch m.team"
 )
 public class Member {
     @Id
