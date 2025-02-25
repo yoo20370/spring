@@ -69,6 +69,32 @@ public class JpaMain {
                 System.out.println("team.getName() = " + team.getName() +" " + team.getMembers());
             }
 
+            String jpqlQuery3 = "Select m FROM Member m WHERE m.id = :member";
+
+            Member member = em.createQuery(jpqlQuery3, Member.class)
+                    .setParameter("member", member1.getId())
+                    .getSingleResult();
+
+            System.out.println("member = " + member);
+            
+            String jpqlQuery4 = "select m from Member m where m.team = :team";
+            Member member10 = em.createQuery(jpqlQuery4, Member.class)
+                    .setParameter("team", teamB)
+                    .getSingleResult();
+
+            System.out.println("member10 = " + member10);
+
+
+            List<Member> resultList = em.createNamedQuery("Member.findByUserName")
+                    .setParameter("username", "회원1")
+                    .getResultList();
+
+            for (Member member5 : resultList) {
+                System.out.println("member5 = " + member5);
+            }
+
+            int resultCount = em.createQuery("update Member m set m.age = 20").executeUpdate();
+            System.out.println(resultCount);
             ts.commit();
         } catch (Exception e) {
             ts.rollback();
