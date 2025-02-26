@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class Member {
+public class Member1 {
 
     @Id
     @GeneratedValue

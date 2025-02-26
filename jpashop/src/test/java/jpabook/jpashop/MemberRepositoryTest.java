@@ -21,7 +21,7 @@ public class MemberRepositoryTest {
     @Transactional
     public void testMember() throws Exception {
         //given
-        Member member = new Member();
+        Member1 member = new Member1();
         member.setName("유영우");
 
         //when
@@ -29,7 +29,7 @@ public class MemberRepositoryTest {
         Long memberId = memberRepository.save(member);
 
         // 1차 캐시에서 가져옴
-        Member findMember = memberRepository.find(memberId);
+        Member1 findMember = memberRepository.find(memberId);
 
         //then
         Assertions.assertThat(findMember).isEqualTo(member);
