@@ -22,8 +22,4 @@ public class MemberRepository {
     public Member1 find(Long id) {
         return em.find(Member1.class, id);
     }
-
-
-
-
 }

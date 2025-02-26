@@ -1,4 +1,4 @@
-package jpabook.jpashop.entity;
+package jpabook.jpashop.entity.item;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -8,7 +8,7 @@ import lombok.Setter;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn
 @Getter @Setter
-public class Item {
+public abstract class Item {
 
     @Id
     @GeneratedValue

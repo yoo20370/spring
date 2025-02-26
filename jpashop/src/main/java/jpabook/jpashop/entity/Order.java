@@ -18,21 +18,27 @@ public class Order {
     @Column(name = "order_id")
     private Long id;
 
-    private LocalDateTime orderDate;
 
+    // member 필드가 연관관계 주인 즉, 두 필드 중 어떤 필드가 FK를 관리하는지
+    // member 필드가 FK를 관리하고 member의 값이 변경되면 외래키의 값이 변경된다.
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
+
     private Member member;
 
     @OneToMany(mappedBy = "order")
     private List<OrderItem> orderItems = new ArrayList<>();
 
-    @OneToOne
+    // 일대일 관계일 때, 외래키를 액세스 많이 하는 곳에 둔다.
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "delivery_id")
     private Delivery delivery;
 
+    // @Temporal로 매핑해줄 필요가 없음, 하이버네이트가 알아서 처리해줌
+    private LocalDateTime orderDate;
+
     @Enumerated(EnumType.STRING)
-    private OrderStatus orderStatus;
+    private OrderStatus orderStatus; // 주문 상태 ORDER, CANCEL
 
     public Order() {
 

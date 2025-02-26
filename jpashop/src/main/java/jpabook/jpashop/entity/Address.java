@@ -4,9 +4,11 @@ import jakarta.persistence.Embeddable;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
+
+
+@Embeddable
 @Getter
 @EqualsAndHashCode
-@Embeddable
 public class Address {
     private String city;
     private String street;

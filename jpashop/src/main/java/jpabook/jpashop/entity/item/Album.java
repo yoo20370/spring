@@ -1,4 +1,4 @@
-package jpabook.jpashop.entity;
+package jpabook.jpashop.entity.item;
 
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@DiscriminatorValue("Album")
+@DiscriminatorValue("A")
 @Getter @Setter
 public class Album extends Item{
 

@@ -1,6 +1,7 @@
 package jpabook.jpashop.entity;
 
 import jakarta.persistence.*;
+import jpabook.jpashop.entity.item.Item;
 import lombok.Getter;
 import lombok.Setter;
 
