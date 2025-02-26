@@ -1,0 +1,55 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.2.0'
+	id 'io.spring.dependency-management' version '1.1.4'
+}
+
+group = 'jpabook'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	// 스프링 부트가 궁합이 맞는 라이브러리를 셋팅해 놓음 - 버전 정보를 적지 않아도 됨
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	runtimeOnly 'com.h2database:h2'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// p6spy - JDBC 드라이버를 감싸 SQL 로그를 출력해주는 오픈소스 라이브러리
+	// JPA, MyBatis, Spring JDBC 등에서 실행되는 SQL 쿼리를 쉽게 모니터링할 수 있도록 도와준다.
+	// 옵션은 라이브러리 홈페이지에서 찾아서 application.properties에 작성하면 된다.
+	// 그 외에는 버전 정보를 적어놓는다.
+	// 스프링 부트 3.0 이상은 1.9.0 이상을 사용해야 함
+	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.0'
+
+	// 캐시도 없애주고, 리로딩 되도록 해줌(더 많은 기능 제공)
+	implementation 'org.springframework.boot:spring-boot-devtools'
+
+	//JUnit4 추가
+	testImplementation("org.junit.vintage:junit-vintage-engine") {
+		exclude group: "org.hamcrest", module: "hamcrest-core"
+	}
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
