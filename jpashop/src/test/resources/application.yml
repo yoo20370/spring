@@ -1,0 +1,20 @@
+spring:
+#  datasource:
+#    url: jdbc:h2:mem:test
+#    username: sa
+#    password:
+#    driver-class-name: org.h2.Driver
+#
+#  jpa:
+#    hibernate:
+#      ddl-auto: create # 애플리케이션 실행 시점에 테이블을 모두 지우고 엔티티를 보고 다시 생성
+#    properties:
+#      hibernate:
+##        show_sql: true # System.out에 출력
+#        format_sql: true
+
+# 하이버네이트 SQL로그를 디버그 모드로 쓴다는 것 - JPA나 하이버네이트가 생성하는 SQL이 보임
+# logger를 통해서 출력
+logging.level: #띄어쓰기 없음
+  org.hibernate.SQL: debug #띄어쓰기 2칸
+  org.hibernate.orm.jdbc.bind: trace
