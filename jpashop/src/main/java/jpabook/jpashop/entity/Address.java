@@ -14,7 +14,7 @@ public class Address {
     private String street;
     private String zipcode;
 
-    public Address() {
+    protected Address() {
 
     }
 
