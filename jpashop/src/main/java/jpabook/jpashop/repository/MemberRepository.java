@@ -1,4 +1,4 @@
-package jpabook.jpashop.entity.repository;
+package jpabook.jpashop.repository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;

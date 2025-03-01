@@ -2,8 +2,8 @@ package jpabook.jpashop.entity.service;
 
 import jakarta.persistence.EntityManager;
 import jpabook.jpashop.entity.Member;
-import jpabook.jpashop.entity.repository.MemberRepository;
-import org.junit.Assert;
+import jpabook.jpashop.repository.MemberRepository;
+import jpabook.jpashop.service.MemberService;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
