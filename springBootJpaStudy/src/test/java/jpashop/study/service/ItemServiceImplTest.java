@@ -13,11 +13,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -96,7 +93,7 @@ public class ItemServiceImplTest {
 
         //when
         Item findItem = em.find(Item.class, albumDto.getItemId());
-        albumDto.setItemName("DM");
+        albumDto.setName("DM");
         findItem.updateItem(albumDto);
 
         // 영속성 컨텍스트 비움
@@ -108,16 +105,16 @@ public class ItemServiceImplTest {
         //then
 
         System.out.println(findItem2.getName());
-        System.out.println(albumDto.getItemName());
-        Assert.assertEquals(findItem2.getName(), albumDto.getItemName());
+        System.out.println(albumDto.getName());
+        Assert.assertEquals(findItem2.getName(), albumDto.getName());
     }
 
     public AlbumDto createAlbumDto() {
         AlbumDto albumDto = new AlbumDto();
         albumDto.setDtype("Album");
-        albumDto.setItemName("슈퍼소닉");
-        albumDto.setItemPrice(19000);
-        albumDto.setItemStockQuantity(2500);
+        albumDto.setName("슈퍼소닉");
+        albumDto.setPrice(19000);
+        albumDto.setStockQuantity(2500);
         albumDto.setArtist("백지헌");
         albumDto.setEtc("etc");
 
@@ -127,9 +124,9 @@ public class ItemServiceImplTest {
     public BookDto createBookDto() {
         BookDto bookDto = new BookDto();
         bookDto.setDtype("Book");
-        bookDto.setItemName("김영한 JPA");
-        bookDto.setItemPrice(30000);
-        bookDto.setItemStockQuantity(20000);
+        bookDto.setName("김영한 JPA");
+        bookDto.setPrice(30000);
+        bookDto.setStockQuantity(20000);
         bookDto.setAuthor("김영한");
         bookDto.setIsbn("123-123");
 
@@ -139,9 +136,9 @@ public class ItemServiceImplTest {
     public MovieDto createMovieDto() {
         MovieDto movieDto = new MovieDto();
         movieDto.setDtype("Movie");
-        movieDto.setItemName("너의이름은");
-        movieDto.setItemPrice(12550);
-        movieDto.setItemStockQuantity(1000);
+        movieDto.setName("너의이름은");
+        movieDto.setPrice(12550);
+        movieDto.setStockQuantity(1000);
         movieDto.setDirector("신카이 마코토");
         movieDto.setActor("다수");
 

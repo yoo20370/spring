@@ -31,9 +31,9 @@ public class Book extends Item{
     @Override
     public void updateItem(ItemDto itemDto) {
         BookDto bookDto = (BookDto) itemDto;
-        this.changeName(bookDto.getItemName());
-        this.changePrice(bookDto.getItemPrice());
-        this.changeStockQuantity(bookDto.getItemStockQuantity());
+        this.changeName(bookDto.getName());
+        this.changePrice(bookDto.getPrice());
+        this.changeStockQuantity(bookDto.getStockQuantity());
         this.changeAuthor(bookDto.getAuthor());
     }
 }

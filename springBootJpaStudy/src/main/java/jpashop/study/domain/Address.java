@@ -13,11 +13,11 @@ import lombok.NoArgsConstructor;
 public class Address {
     private String city;
     private String street;
-    private String zipCode;
+    private String zipcode;
 
     public Address(String city, String street, String zipCode) {
         this.city = city;
         this.street = street;
-        this.zipCode = zipCode;
+        this.zipcode = zipCode;
     }
 }

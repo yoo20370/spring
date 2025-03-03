@@ -31,9 +31,9 @@ public class Album extends Item{
     @Override
     public void updateItem(ItemDto itemDto) {
         AlbumDto albumDto = (AlbumDto) itemDto;
-        this.changeName(albumDto.getItemName());
-        this.changePrice(albumDto.getItemPrice());
-        this.changeStockQuantity(albumDto.getItemStockQuantity());
+        this.changeName(albumDto.getName());
+        this.changePrice(albumDto.getPrice());
+        this.changeStockQuantity(albumDto.getStockQuantity());
         this.changeArtist(albumDto.getArtist());
     }
 }

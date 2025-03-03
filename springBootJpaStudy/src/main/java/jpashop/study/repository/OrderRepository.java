@@ -1,6 +1,7 @@
 package jpashop.study.repository;
 
 import jpashop.study.domain.Order;
+import jpashop.study.domain.OrderSearch;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,4 +16,6 @@ public interface OrderRepository {
     List<Order> findAll();
 
 //    List<Order> findByString(OrderSearch orderSearch)
+
+    List<Order> findAllByString(OrderSearch orderSearch);
 }

@@ -17,18 +17,18 @@ public class ItemFactoryImpl implements ItemFactory{
         switch (itemDto.getDtype()) {
             case "Album" -> {
                 AlbumDto albumDto = (AlbumDto) itemDto;
-                return Album.createAlbum(albumDto.getItemName(), albumDto.getItemPrice(),
-                        albumDto.getItemStockQuantity(), albumDto.getArtist(), albumDto.getEtc());
+                return Album.createAlbum(albumDto.getName(), albumDto.getPrice(),
+                        albumDto.getStockQuantity(), albumDto.getArtist(), albumDto.getEtc());
             }
             case "Book" -> {
                 BookDto bookDto = (BookDto) itemDto;
-                return Book.createBook(bookDto.getItemName(), bookDto.getItemPrice(),
-                        bookDto.getItemStockQuantity(), bookDto.getAuthor(), bookDto.getIsbn());
+                return Book.createBook(bookDto.getName(), bookDto.getPrice(),
+                        bookDto.getStockQuantity(), bookDto.getAuthor(), bookDto.getIsbn());
             }
             case "Movie" -> {
                 MovieDto movieDto = (MovieDto) itemDto;
-                return Movie.createMovie(movieDto.getItemName(), movieDto.getItemPrice(),
-                        movieDto.getItemStockQuantity(), movieDto.getDirector(), movieDto.getActor());
+                return Movie.createMovie(movieDto.getName(), movieDto.getPrice(),
+                        movieDto.getStockQuantity(), movieDto.getDirector(), movieDto.getActor());
             }
             default -> throw new IllegalStateException("알 수 없는 데이터 타입입니다.");
         }

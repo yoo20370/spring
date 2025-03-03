@@ -7,8 +7,8 @@ import lombok.Setter;
 public class ItemDto {
 
     private Long itemId;
-    private String itemName;
-    private int itemPrice;
-    private int itemStockQuantity;
+    private String name;
+    private int price;
+    private int stockQuantity;
     private String dtype;
 }

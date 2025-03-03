@@ -7,8 +7,6 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
-
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -37,9 +35,9 @@ public class Movie extends Item{
     @Override
     public void updateItem(ItemDto itemDto) {
         MovieDto movieDto = (MovieDto) itemDto;
-        this.changeName(movieDto.getItemName());
-        this.changePrice(movieDto.getItemPrice());
-        this.changeStockQuantity(movieDto.getItemStockQuantity());
+        this.changeName(movieDto.getName());
+        this.changePrice(movieDto.getPrice());
+        this.changeStockQuantity(movieDto.getStockQuantity());
         this.changeDirector(movieDto.getDirector());
         this.changeActor(movieDto.getActor());
     }
