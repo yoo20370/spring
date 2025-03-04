@@ -20,6 +20,7 @@ public class ItemRepository {
             em.persist(item);
         } else {
             // 이미 DB에 등록된 것을 가져온 것 // 업데이트와 비슷한 것
+            // 실무에서 사용할 일이 거의 없음
             em.merge(item);
         }
     }

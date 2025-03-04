@@ -35,13 +35,58 @@ public class OrderRepository {
 
     // 동적 쿼리를 사용해서 검색 기능을 제작할 것
     // 문자열로 동적 쿼리를 작성하는 것은 너무 힘들고, 실수할 가능성이 매우 높다. 버그 잡기도 힘들다.
+//    public List<Order> findAllByString(OrderSearch orderSearch) {
+//        String jpql = "select o from Order o join o.member m";
+//
+//        // flag 변수라고 생각
+//        boolean isFirstCondition = true;
+//
+//        // 주문 상태 검색
+//        if (orderSearch.getOrderStatus() != null) {
+//            if (isFirstCondition) {
+//                jpql += " where";
+//                isFirstCondition = false;
+//            } else {
+//                jpql += " and";
+//            }
+//            jpql += " o.status = :status";
+//        }
+//
+//        //회원 이름 검색
+//        if (StringUtils.hasText(orderSearch.getMemberName())) {
+//            if (isFirstCondition) {
+//                jpql += " where";
+//                isFirstCondition = false;
+//            } else {
+//                jpql += " and";
+//            }
+//            jpql += " m.name like :name";
+//        }
+//
+//        TypedQuery<Order> query = em.createQuery(jpql, Order.class)
+//                .setMaxResults(1000); //최대 1000건
+//        if (orderSearch.getOrderStatus() != null) {
+//            query = query.setParameter("status", orderSearch.getOrderStatus());
+//        }
+//
+//        if (StringUtils.hasText(orderSearch.getMemberName())) {
+//            query = query.setParameter("name", orderSearch.getMemberName());
+//        }
+//        return query.getResultList();
+//
+////        return em.createQuery("select o from Order o join o.member m "
+////                        + " where o.orderStatus =:status "
+////                        + " and m.name like :name", Order.class)
+////                .setParameter("status", orderSearch.getOrderStatus())
+////                .setParameter( "name", orderSearch.getMemberName())
+////                .setMaxResults(1000) // 최대 1000건
+////                .getResultList();
+//    }
     public List<Order> findAllByString(OrderSearch orderSearch) {
-        String jpql = "select o from Order o join o.member m";
-
-        // flag 변수라고 생각
+//language=JPAQL
+        String jpql = "select o From Order o join o.member m";
         boolean isFirstCondition = true;
-
-        // 주문 상태 검색
+//주문 상태 검색
         if (orderSearch.getOrderStatus() != null) {
             if (isFirstCondition) {
                 jpql += " where";
@@ -51,8 +96,7 @@ public class OrderRepository {
             }
             jpql += " o.status = :status";
         }
-
-        //회원 이름 검색
+//회원 이름 검색
         if (StringUtils.hasText(orderSearch.getMemberName())) {
             if (isFirstCondition) {
                 jpql += " where";
@@ -62,27 +106,16 @@ public class OrderRepository {
             }
             jpql += " m.name like :name";
         }
-
         TypedQuery<Order> query = em.createQuery(jpql, Order.class)
                 .setMaxResults(1000); //최대 1000건
         if (orderSearch.getOrderStatus() != null) {
             query = query.setParameter("status", orderSearch.getOrderStatus());
         }
-
         if (StringUtils.hasText(orderSearch.getMemberName())) {
             query = query.setParameter("name", orderSearch.getMemberName());
         }
         return query.getResultList();
-
-//        return em.createQuery("select o from Order o join o.member m "
-//                        + " where o.orderStatus =:status "
-//                        + " and m.name like :name", Order.class)
-//                .setParameter("status", orderSearch.getOrderStatus())
-//                .setParameter( "name", orderSearch.getMemberName())
-//                .setMaxResults(1000) // 최대 1000건
-//                .getResultList();
     }
-
     /**
      * JPA Criteria
      * JPA에서 동적 쿼리를 자바로 작성할 수 있게 해주는 표준
