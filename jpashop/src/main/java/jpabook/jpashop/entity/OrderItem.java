@@ -1,5 +1,6 @@
 package jpabook.jpashop.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jpabook.jpashop.entity.item.Item;
 import lombok.AccessLevel;
