@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.BatchSize;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class Order {
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
+
 
     // 일대일 관계일 때, 외래키를 액세스 많이 하는 곳에 둔다.
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -76,7 +78,9 @@ public class Order {
         order.setDelivery(delivery);
         for (OrderItem orderItem : orderItems) {
             order.getOrderItems().add(orderItem);
+            orderItem.setOrder(order);
         }
+
         order.setOrderStatus(OrderStatus.ORDER);
         order.setOrderDate(LocalDateTime.now());
 

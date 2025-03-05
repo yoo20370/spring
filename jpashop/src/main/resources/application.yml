@@ -12,6 +12,9 @@ spring:
       hibernate:
 #        show_sql: true # System.out에 출력
         format_sql: true
+#        default_batch_fetch_size: 100
+
+
 
 # 하이버네이트 SQL로그를 디버그 모드로 쓴다는 것 - JPA나 하이버네이트가 생성하는 SQL이 보임
 # logger를 통해서 출력

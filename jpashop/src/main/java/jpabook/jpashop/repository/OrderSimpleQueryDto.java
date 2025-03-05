@@ -1,7 +1,6 @@
 package jpabook.jpashop.repository;
 
 import jpabook.jpashop.entity.Address;
-import jpabook.jpashop.entity.Order;
 import jpabook.jpashop.entity.OrderStatus;
 import lombok.Data;
 
