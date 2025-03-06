@@ -65,7 +65,11 @@ public class Order {
     public static Order createOrder(Member member, Delivery delivery, OrderItem... orderItems) {
         Order order = new Order(member, delivery);
 
-        order.getOrderItems().addAll(Arrays.stream(orderItems).toList());
+        for (OrderItem orderItem : orderItems) {
+            order.getOrderItems().add(orderItem);
+            orderItem.changeOrder(order);
+        }
+//        order.getOrderItems().addAll(Arrays.stream(orderItems).toList());
 
         return order;
     }

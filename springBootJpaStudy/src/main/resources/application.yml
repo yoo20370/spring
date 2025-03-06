@@ -13,6 +13,7 @@ spring:
       hibernate:
         show_sql:
         format_sql:
+    open-in-view: false
 
 logging:
   level:

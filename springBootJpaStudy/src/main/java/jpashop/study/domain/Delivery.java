@@ -35,4 +35,8 @@ public class Delivery {
     public void changeOrder(Order order) {
         this.order = order;
     }
+
+    public void changeAddress(Address address) {
+        this.address = address;
+    }
 }

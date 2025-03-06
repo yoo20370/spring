@@ -1,5 +1,6 @@
 package jpashop.study.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -24,6 +25,7 @@ public class Member {
     @Embedded
     private Address address;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "member")
     List<Order> orders = new ArrayList<>();
 
@@ -36,5 +38,13 @@ public class Member {
     // 멤버 생성자 메서드
     public static Member createMember(String name, Address address) {
         return new Member(name, address);
+    }
+
+    public void changeName(String name) {
+        this.name = name;
+    }
+
+    public void changeAddress(Address address) {
+        this.address = address;
     }
 }
