@@ -12,6 +12,7 @@ spring:
       hibernate:
 #        show_sql: true # System.out에 출력
         format_sql: true
+    open-in-view: false
 #        default_batch_fetch_size: 100
 
 
