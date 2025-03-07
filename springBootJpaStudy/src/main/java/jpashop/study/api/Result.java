@@ -1,4 +1,4 @@
-package jpashop.study.api.Member;
+package jpashop.study.api;
 
 import lombok.Data;
 

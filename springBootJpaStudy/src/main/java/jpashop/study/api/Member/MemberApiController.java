@@ -1,10 +1,10 @@
 package jpashop.study.api.Member;
 
 import jakarta.validation.Valid;
+import jpashop.study.api.Result;
 import jpashop.study.domain.Member;
 import jpashop.study.service.MemberService;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.sql.Update;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

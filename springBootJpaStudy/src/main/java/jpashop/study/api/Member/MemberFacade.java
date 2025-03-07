@@ -1,17 +1,14 @@
 package jpashop.study.api.Member;
 
+import jpashop.study.api.Result;
 import jpashop.study.domain.Address;
 import jpashop.study.domain.Member;
 import jpashop.study.service.MemberService;
 import lombok.RequiredArgsConstructor;
-import org.eclipse.jdt.internal.compiler.lookup.MemberTypeBinding;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
 
 @Service
 @RequiredArgsConstructor
@@ -54,4 +51,6 @@ public class MemberFacade {
 
         return new Result<List<MemberDto>>("모든 회원 조회", collect);
     }
+
+
 }

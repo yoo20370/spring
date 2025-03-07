@@ -56,4 +56,8 @@ public class OrderServiceImpl implements OrderService{
     public List<Order> findAll() {
         return orderRepository.findAll();
     }
+
+    public List<Order> findAllByString(OrderSearch orderSearch) {
+        return orderRepository.findAllByString(orderSearch);
+    }
 }

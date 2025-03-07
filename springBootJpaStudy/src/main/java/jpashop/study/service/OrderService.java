@@ -1,6 +1,7 @@
 package jpashop.study.service;
 
 import jpashop.study.domain.Order;
+import jpashop.study.domain.OrderSearch;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,4 +17,6 @@ public interface OrderService {
     Order findOne(Long orderId);
 
     List<Order> findAll();
+
+    List<Order> findAllByString(OrderSearch orderSearch);
 }
